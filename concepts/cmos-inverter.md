@@ -3,60 +3,58 @@
 ## Circuit
 
 ```
-        VDD
+        vdd
          |
-    [PMOS] ← gate = IN
+    [PMOS] ← gate = VIN  (pmos_18, W=2µm, L=0.18µm)
          |
-        OUT
+        VOUT
          |
-    [NMOS] ← gate = IN
+    [NMOS] ← gate = VIN  (nmos_18, W=1µm, L=0.18µm)
          |
-        GND
+        VSS
 ```
-
-- PMOS: source → VDD, drain → OUT, gate → IN
-- NMOS: source → GND, drain → OUT, gate → IN
 
 ## Operation
 
 | VIN | PMOS | NMOS | VOUT |
 |-----|------|------|------|
-| Low (0) | ON (conducting) | OFF | High (VDD) |
-| High (VDD) | OFF | ON (conducting) | Low (GND) |
+| Low (0V) | ON | OFF | High (VDD = 1.8V) |
+| High (1.8V) | OFF | ON | Low (0V) |
+
+Rail-to-rail output swing — key CMOS advantage over older logic families.
 
 ## Voltage Transfer Characteristic (VTC)
 
-Five regions based on VIN:
-1. **Region 1** (VIN near 0): PMOS in linear, NMOS off → VOUT = VDD
-2. **Region 2**: PMOS in saturation, NMOS in saturation
-3. **Region 3** (VIN = VM): Both in saturation — high gain, sharp transition
-4. **Region 4**: PMOS in saturation, NMOS in linear
-5. **Region 5** (VIN near VDD): PMOS off, NMOS in linear → VOUT = 0
-
-### Key Parameters
-- **VM** (Switching Threshold): VIN where VOUT = VIN
-  - Ideal: VM = VDD/2
-  - VM = (VTHn + VTHp + VDD) / 2 (approximate)
-- **VOH** = VDD, **VOL** = GND (rail-to-rail swing — key CMOS advantage)
-- **NMH** (Noise Margin High) = VOH − VIH
-- **NML** (Noise Margin Low) = VIL − VOL
+- Sweep VIN from 0 → 1.8V (DC analysis)
+- VOUT starts high, transitions sharply, ends low
+- **VM** (switching threshold): VIN where VOUT = VIN ≈ 0.9V (ideally VDD/2)
+- Sharp transition = high gain in that region
 
 ## Sizing
-- To center VM at VDD/2: **(W/L)p / (W/L)n = µn / µp ≈ 2**
-- Typical starting point: PMOS W = 2µm, NMOS W = 1µm, both L = 180nm (for SCL 180nm)
+- To center VM at VDD/2: **(W/L)p ≈ 2 × (W/L)n**
+- Reason: hole mobility (PMOS) ≈ half electron mobility (NMOS)
+- In SCL 180nm: PMOS W=2µm, NMOS W=1µm, both L=0.18µm
 
 ## Propagation Delay
-- **tpHL**: high-to-low output transition (NMOS discharging CL)
-- **tpLH**: low-to-high output transition (PMOS charging CL)
-- **tp** = (tpHL + tpLH) / 2
-- Reduce by: increasing W, reducing L, reducing load capacitance
 
-## Power Dissipation
-- **Static power**: ~0 (no DC path between VDD and GND in steady state)
-- **Dynamic power**: P = α · CL · VDD² · f
-  - α = activity factor, f = switching frequency
+Measured at 50% point (VDD/2 = 900mV):
+
+- **tpLH**: output transitions low→high (PMOS charging load cap)
+- **tpHL**: output transitions high→low (NMOS discharging load cap)
+- **tp** = (tpLH + tpHL) / 2
+
+From simulation (TT corner, 27°C, with load cap):
+- tpLH ≈ 4.286ns
+- tpHL ≈ 3.276ns
+
+## Testbench Setup
+- Input: `vsource` (pulse), 0→1.8V, period ~40ns
+- Supply: `vdc` = 1.8V
+- Load: `cap` at output (models fanout/wire capacitance)
+- Simulations: transient (time domain) + DC sweep (VTC)
 
 ## In SCL 180nm PDK
-- Devices: `nmos2v` (NMOS, 1.8V), `pmos2v` (PMOS, 1.8V)
+- NMOS device: `nmos_18` (W=1µm, L=0.18µm)
+- PMOS device: `pmos_18` (W=2µm, L=0.18µm)
 - VDD = 1.8V
-- VTHn ≈ 0.5V, VTHp ≈ −0.5V (approximate)
+- Library: `project0` on NIT Calicut server
