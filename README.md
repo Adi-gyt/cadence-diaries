@@ -41,8 +41,9 @@ cadence-diaries/
 
 | Date | What happened |
 |------|--------------|
-| [Jun 9](logs/2026-06-09.md) | Setup — MobaXterm, X11, first look at Virtuoso |
-| [Jun 10–12](logs/2026-06-12.md) | Schematic, symbol, testbench, transient, DC, delay, PVT corners |
+| [Jun 11](logs/2026-06-09.md) | Setup — MobaXterm, X11, first look at Virtuoso |
+| [Jun 12](logs/2026-06-12.md) | Schematic, symbol, testbench, transient, DC, delay, PVT corners |
+| [Jun 15](logs/day02.md) | Layout, DRC clean, LVS correct, PEX, post-layout sim |
 
 ---
 
