@@ -30,10 +30,10 @@ cadence-diaries/
 | DC simulation (VTC curve) | ✅ |
 | Propagation delay (tpLH, tpHL) | ✅ |
 | PVT corner analysis (ADE XL, 12 corners) | ✅ |
-| Layout | 🔄 |
-| DRC | 🔄 |
-| LVS | 🔄 |
-| Post-layout simulation | 🔄 |
+| Layout | ✅ |
+| DRC | ✅ |
+| LVS | ✅ |
+| Post-layout simulation | ✅ |
 
 ---
 
