@@ -1,4 +1,4 @@
-# Day 5 — June 15, 2026
+# Day 2 — June 15, 2026
 
 **Focus:** Inverter layout → DRC → LVS → PEX → post-layout simulation
 
