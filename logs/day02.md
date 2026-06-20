@@ -74,11 +74,11 @@ Re-ran transient (0–400ns) and DC sweep (0–1.8V):
 
 ## Schematics / Screenshots
 
-- `img/day05_layout_final.png` — final layout with PMOS, NMOS, body taps, M1 routing and pins
-- `img/day05_drc_clean.png` — Calibre DRC: 0 violations
-- `img/day05_lvs_correct.png` — Calibre LVS: CORRECT
-- `img/day05_pex_summary.png` — Calibre xRC: 0 errors
-- `img/day05_postlayout_sim.png` — transient and DC waveforms with parasitics
+- `schematics/day05_layout_final.png` — final layout with PMOS, NMOS, body taps, M1 routing and pins
+- `schematics/day05_drc_clean.png` — Calibre DRC: 0 violations
+- `schematics/day05_lvs_correct.png` — Calibre LVS: CORRECT
+- `schematics/day05_pex_summary.png` — Calibre xRC: 0 errors
+- `schematics/day05_postlayout_sim.png` — transient and DC waveforms with parasitics
 
 ## Resources
 
