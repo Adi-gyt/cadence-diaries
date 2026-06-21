@@ -13,8 +13,7 @@ The manual covers *how* to use Virtuoso. This repo covers *why* things work the 
 cadence-diaries/
 ├── logs/           # Daily internship logs
 ├── concepts/       # Theory & concept notes
-├── schematics/     # Screenshots from Virtuoso & Calibre
-└── resources/      # Cheatsheets, PDK notes
+└── schematics/     # Screenshots from Virtuoso & Calibre 
 ```
 
 ---
