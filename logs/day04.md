@@ -29,6 +29,12 @@ Error categories encountered during iteration:
 
 **Key lesson:** AA.C.1 showed a 14-vertex irregular active polygon spanning the full IOPAD width. This was caused by merged active layers at misaligned pad cell boundaries — the fix was redoing the placement cleanly, not editing individual shapes.
 
+![DRC First Run](../schematics/day04_drc01.png)
+*Early DRC run — misaligned pad abutment causing poly/metal spacing and active area errors*
+
+![DRC Clean](../schematics/day04_drc02.png)
+*DRC after clean redo — 6 waivable AA.C density errors, all other rules passing*
+
 ### 2. CDL Export
 
 Exported schematic netlist from CIW:
@@ -83,6 +89,12 @@ Fixes applied:
 - Nets: 22L = 22S  
 - Instances: 36L = 36S
 
+![LVS Incorrect](../schematics/day04_lvs_incorrect.png)
+*First LVS run — INCORRECT, VSSO port missing, pin order mismatch causing 19 discrepancies*
+
+![LVS Correct](../schematics/day04_lvs_correct.png)
+*Second LVS run — CORRECT, 8 ports, 22 nets, 36 instances*
+
 ### 5. final_chip Schematic (Section 3.1)
 
 Created new schematic cellview `final_chip` in `project0`:
@@ -109,6 +121,9 @@ Connections:
 
 Check and Save: **no errors** ✅
 
+![final_chip Schematic](../schematics/final_chip_schematic.png)
+*final_chip schematic — IOPAD + inverter instances, 8 pins, power and signal connections*
+
 ### 6. final_chip Symbol
 
 Created symbol from schematic (`Create → Cellview → From Cellview`). 8 pins auto-placed:
@@ -118,6 +133,9 @@ Created symbol from schematic (`Create → Cellview → From Cellview`). 8 pins 
 - Bottom: `VSS`, `VSSO`
 
 Saved. Ready for testbench instantiation.
+
+![final_chip Symbol](../schematics/final_chip_symbol.png)
+*final_chip symbol — 8 pins auto-placed from schematic*
 
 ---
 
