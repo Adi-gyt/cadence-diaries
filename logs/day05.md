@@ -30,6 +30,9 @@ Integrated the CMOS inverter into the IO ring to build the complete `final_chip`
 - `EXT_vout`: inverter VOUT → right IO pad EXT_vout pin (M3)
 - Rat's nest lines confirmed connections after routing
 
+![final_chip Layout](../schematics/day05_finalchip_layout.png)
+*final_chip layout — IOPAD ring with inverter at die center, M3 signal routing, via stacks for power*
+
 ### 4. Power Connections (Critical — see Issues below)
 - VDD ring on **M3**, inverter `vdd` pin on **M1** → required full via stack
 - VSS ring on **M3**, inverter `vss` pin on **M1** → required full via stack
@@ -42,6 +45,9 @@ Integrated the CMOS inverter into the IO ring to build the complete `final_chip`
 - **6 errors** — all `AA.C` density violations (AA.C.1 × 1, AA.C.3 × 2, AA.C.5 × 3)
 - Waivable — sparse die area with single inverter causes low active density
 - Resolved by dummy fill in later assembly steps
+
+![DRC 6 Errors](../schematics/day05_drc_6errors.png)
+*final_chip DRC — 6 waivable AA.C density errors, all other rules clean*
 
 ---
 
@@ -108,6 +114,12 @@ Settings: identical to IOPAD LVS from Section 2.4. "Export from layout viewer" c
 | 5 | INCORRECT | VSS/VSSO pin type mismatch | Changed signal type from `ground` → `signal` in schematic, regenerated CDL |
 | 6 | **CORRECT ✅** | — | Full M1→M2→M3 via stack placed correctly |
 
+![LVS Short Circuit](../schematics/day05_short_circuit_error.png)
+*LVS Run 3 — EXT_vout and PADR_vout pins overlapping, causing short to VDDO/VSSO*
+
+![LVS Open Circuit VDD](../schematics/day05_open_circuit_vdd.png)
+*LVS Run 4 — VDD open circuit, inverter vdd on M1 not connected to M3 power ring*
+
 ### Final LVS Result
 ```
 Nets:      22L = 22S  ✅
@@ -115,6 +127,9 @@ Instances: 37L = 37S  ✅
 Ports:     8L  = 8S   ✅
 Warning:   Ambiguity points resolved arbitrarily (harmless)
 ```
+
+![LVS Correct](../schematics/day05_lvs_correct.png)
+*LVS Run 6 — CORRECT, 22 nets, 37 instances, 8 ports*
 
 ---
 
