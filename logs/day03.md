@@ -1,4 +1,4 @@
-# Day 03 June 16
+# Day 03 -- June 16
 
 ---
 
