@@ -59,6 +59,15 @@ grep -i "\.subckt pvdi\b\|\.subckt pv0i\b\|\.subckt pvda\b\|\.subckt pv0a\b\|\.s
   - Check and Save
   - Design → Create Cellview → From Cellview (symbol)
   - Pin arrangement: VDD/VDDO left, VSS/VSSO right, PAD top, PADR bottom (for pc3d00)
+ 
+![pvdi Symbol](../schematics/day03_03_pvdi_symbol.png)
+*pvdi symbol — pins: VDD, VSS, VDDO, VSSO, all inputOutput*
+
+![pv0i Symbol](../schematics/day03_04_pv0i_symbol.png)
+*pv0i symbol — pins: VSS, VDD, VDDO, VSSO, all inputOutput*
+
+![pc3d00 Symbol](../schematics/day03_07_pc3d00_symbol.png)
+*pc3d00 symbol — signal pad cell with PAD, PADR, VDD, VSS, VDDO, VSSO*
 
 ### 5. IOPAD Top-Level Schematic (Section 2.2)
 - Created new schematic `IOPAD` in project0 library
@@ -73,6 +82,12 @@ grep -i "\.subckt pvdi\b\|\.subckt pv0i\b\|\.subckt pvda\b\|\.subckt pv0a\b\|\.s
   - EXT_vout, PADR_vout (right pc3d00 — PAD and PADR)
 - Check and Save → created IOPAD symbol
 
+![IOPAD Schematic](../schematics/day03_08_IOPAD_schematic.png)
+*IOPAD top-level schematic — 6 pad instances, power nets, 8 schematic pins*
+
+![IOPAD Symbol](../schematics/day03_08_IOPAD_symbol.png)
+*IOPAD symbol view generated from schematic*
+
 ### 6. IO Ring Layout (Section 2.3)
 - Created layout view via Connectivity → Generate → All From Source
   - I/O Pins tab: all pins set to M3 pin layer, 0.28 x 0.28 size
@@ -83,6 +98,12 @@ grep -i "\.subckt pvdi\b\|\.subckt pv0i\b\|\.subckt pvda\b\|\.subckt pv0a\b\|\.s
   - **Bottom:** pfrelr (corner), pfeed30000, pv0a, pfeed30000, pv0i, pfeed30000, pfrelr (corner)
 - Abutted all cells using `A` — purple PR boundaries must overlap with no gaps
 - **pfrelr** = corner cells | **pfeed30000** = filler cells (30000 width)
+
+![IO Ring Layout Full](../schematics/day03_10_io_ring_layout_full.png)
+*Full IO ring layout — corner cells, filler cells, pad cells abutted in ring formation*
+
+![IO Ring Layout Zoomed](../schematics/day03_11_io_ring_layout_zoomed.png)
+*Zoomed view — pad cell abutment, PR boundary overlap, M3 pin locations*
 
 ### 7. Pin Placement in Layout
 - Auto-generated pins were placed near origin — moved each to correct M3 label location
