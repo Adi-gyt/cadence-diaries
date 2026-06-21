@@ -2,6 +2,7 @@
 
 > Documenting my analog VLSI internship at NIT Calicut (June–July 2026) under Prof. Dhanaraj.  
 > Tools: Cadence Virtuoso · SCL 180nm PDK · Calibre nmDRC/nmLVS/xRC · MobaXterm (X11) · Remote NIT server
+> Deliverable: Tapeout-ready GDS (12MB) — CMOS inverter with full IO ring, seal ring, and dummy fill
 
 The manual covers *how* to use Virtuoso. This repo covers *why* things work the way they do.
 
