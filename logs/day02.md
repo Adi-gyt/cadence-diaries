@@ -18,11 +18,17 @@ Routed connections:
 
 Placed all four pins (VIN, VOUT, VDD, VSS) on top of their M1 drawing geometries. Drew PR boundary to define cell extent.
 
+![Inverter Layout](../schematics/day02_layout_final.png)
+*Final inverter layout — PMOS/NMOS pcells, body taps, M1 routing, PR boundary*
+
 ### DRC — Calibre nmDRC
 
 - Rule file: SCL DRC Check ver.00_00_01
 - 16 rulechecks executed
 - **Result: 0 violations**
+
+  ![DRC Clean](../schematics/day02_drc_clean.png)
+*Calibre nmDRC — 0 violations, SCL 180nm rule deck*
 
 ### LVS — Calibre nmLVS
 
@@ -30,12 +36,18 @@ Placed all four pins (VIN, VOUT, VDD, VSS) on top of their M1 drawing geometries
 - Ports: 4L = 4S | Nets: 4L = 4S | Instances: 2L = 2S (MN + MP)
 - **Result: CORRECT**
 
+  ![LVS Correct](../schematics/day02_lvs_correct.png)
+*Calibre nmLVS — CORRECT, 4 ports, 4 nets, 2 instances*
+
 ### PEX — Calibre xRC
 
 - Extracted parasitic RC netlist for all 4 nets (VIN, VSS, vdd, VOUT)
 - Output: `inverter.pex.netlist`
 - xRC Errors: 0 | xRC Warnings: 7 (undefined ground layers — isp, SNU, DNWELL — harmless server config issue)
 - **Result: Extraction successful**
+
+  ![PEX Complete](../schematics/day02_pex_clean.png)
+*Calibre xRC — 0 errors, parasitic RC extracted for all 4 nets*
 
 ### Post-Layout Simulation
 
@@ -47,6 +59,9 @@ Re-ran transient (0–400ns) and DC sweep (0–1.8V):
 - Output correctly inverts input, rail-to-rail swing 0–1.8V
 - VTC transition at ~0.9V
 - Edge rounding visible on transient waveform compared to pre-layout — expected effect of parasitic capacitance
+
+  ![Post-Layout Simulation](../schematics/day02_postlayout_sim.png)
+*Post-layout transient and DC — slight edge rounding from extracted parasitics*
 
 ## Pre vs Post Layout
 
@@ -72,13 +87,6 @@ Re-ran transient (0–400ns) and DC sweep (0–1.8V):
 
 **PEX (Parasitic Extraction)** — Extracts parasitic R and C from the physical geometry of the layout. The resulting netlist is used for post-layout simulation, which gives a more realistic picture of circuit performance than the ideal schematic sim.
 
-## Schematics / Screenshots
-
-- `schematics/day05_layout_final.png` — final layout with PMOS, NMOS, body taps, M1 routing and pins
-- `schematics/day05_drc_clean.png` — Calibre DRC: 0 violations
-- `schematics/day05_lvs_correct.png` — Calibre LVS: CORRECT
-- `schematics/day05_pex_summary.png` — Calibre xRC: 0 errors
-- `schematics/day05_postlayout_sim.png` — transient and DC waveforms with parasitics
 
 ## Resources
 
