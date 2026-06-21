@@ -1,7 +1,4 @@
-# Day 03 — IO Ring Design (Manual 2, Pages 1–12)
-**Date:** 16 June 2026  
-**Intern:** intern02_2026 | NIT Calicut VLSI Lab (vlsilab16)  
-**Tool:** Cadence Virtuoso Layout Suite XL | SCL 180nm PDK | Calibre nmDRC
+# Day 03 June 16
 
 ---
 
