@@ -24,6 +24,9 @@ Port order extracted from netlist:
 subckt final_chip ( VSSO VSS VDD VDDO vin EXT_vout EXT_vin PADR_vout )
 ```
 
+![PEX Complete](../schematics/day06_pex_complete.png)
+*Calibre xRC — 0 errors, parasitic RC extracted for final_chip, port order confirmed*
+
 ### 2. CDF Edit for `final_chip` (Pre-requisite for Post-Layout Sim)
 
 CIW → **Tools → CDF → Edit**
@@ -98,7 +101,13 @@ Result: Generated `final_chip__dummy.gds` with fill patterns for MDP08, MDP40, M
 - Selected both instances → Q → set Origin X=0, Y=0 for both to align
 - Saved
 
+![final_chip_withdummy Layout](../schematics/day06_final_chip_withdummy_layout.png)
+*final_chip_withdummy — IOPAD ring + inverter core + seal ring + dummy fill at origin*
+
 Visual result: dummy fill (red pattern) covers all empty areas around IO ring uniformly.
+
+![Dummy Fill Cell](../schematics/day06_dummy_fill_cell.png)
+*Calibre DUMMY_FILL output — fill rectangles across MDP and dumINarea_AA layers*
 
 **Note:** Both `project0` and `DUMMY_FILL` have a cell named `final_chip` — this causes a GDS naming conflict during stream-out. The `project0/final_chip` gets renamed to `final_chip_0` in the output GDS. This is a known issue with no impact on the design.
 
@@ -130,6 +139,10 @@ mkdir /home/intern02_2026/cadence/project0/final_chip_withdummy/lvs
   - Stop View List: `auCdl layout`
 - Used existing `final_chip.cdl` from Day 5
 - **Result: LVS CORRECT ✅**
+
+![LVS Correct](../schematics/day06_lvs_correct.png)
+*final_chip LVS CORRECT — 22 nets, 37 instances, 8 ports, sign-off clean*
+
   - Nets: 22L = 22S
   - Instances: 37L = 37S
   - Ports: 8L = 8S
@@ -161,6 +174,9 @@ Created testbench `tb_final`:
 - Transient waveform shows inverter function through IO pads
 - Output (green) correctly inverts input (red) with realistic RC delay — edge rounding from IO pad parasitics visible
 
+![Post-Layout Simulation Waveform](../schematics/day06_postlayout_sim_waveform.png)
+*Post-layout transient — inverter function verified through IO pads, RC edge rounding from pad parasitics*
+
 ### 8. Final GDS Stream-Out
 
 ```bash
@@ -183,6 +199,9 @@ Result:
 **12MB GDS — full chip with IO ring, seal ring, and dummy fill. Tapeout-ready.**
 
 ---
+
+![GDS Stream-Out](../schematics/day06_gds_streamout.png)
+*GDS stream-out — final_chip_withdummy.gds, 12MB, tapeout-ready*
 
 ## Key Concepts
 
